@@ -17,8 +17,11 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email');
-            $table->string('membership_type');
-            $table->string('membership_expiration');
+            $table->date('membership_expiration');
+            $table->unsignedBigInteger('trainer_id')->nullable();
+            $table->unsignedBigInteger('membership_id')->nullable();
+            $table->foreign('trainer_id')->references('id')->on('trainers');
+            $table->foreign('membership_id')->references('id')->on('memberships');
             $table->timestamps();
         });
     }
